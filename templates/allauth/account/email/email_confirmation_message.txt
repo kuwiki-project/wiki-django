@@ -1,0 +1,6 @@
+{% extends "account/email/base_message.txt" %}
+{% load account %}
+{% load i18n %}
+{% block content %}{% autoescape off %}{% user_display user as user_display %}下記URLよりメールアドレスの認証を完了させてください。
+
+{{ activate_url }}{% endautoescape %}{% endblock %}
