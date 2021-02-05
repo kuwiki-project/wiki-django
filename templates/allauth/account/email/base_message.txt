@@ -1,2 +1,2 @@
-{% load i18n %}{% autoescape off %}京大Wikiへようこそ！
+{% load i18n %}{% autoescape off %}京大wikiへようこそ！
 {% block content %}{% endblock %}{% endautoescape %}

@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import CustomUser, Lecture, Period, Instructor, Course, Exam
 
 admin.site.title = '管理画面'
-admin.site.site_header = '京大Wiki管理'
+admin.site.site_header = '京大wiki管理'
 admin.site.index_title = 'メニュー'
 
 
