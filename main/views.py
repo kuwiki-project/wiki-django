@@ -21,7 +21,7 @@ class CourseViewSet(ListAPIView):
         q = super(CourseViewSet, self).get_queryset().prefetch_related(Prefetch("lecture_set", queryset=Lecture.objects.all(
         ).prefetch_related("period_set", "instructor_set").order_by("-id")), "exam_set").annotate(exam_count=Count('exam', distinct=True)).order_by("-id")
         search_word = self.request.query_params.get('search', None)
-        if search_word is not '' and search_word is not None:
+        if search_word !='' and search_word != None:
             q_list = search_word.split()
             query = reduce(and_, [Q(name__icontains=q) | Q(field__icontains=q) | Q(lecture__year__icontains=q) | Q(lecture__instructor__instructor__icontains=q) | Q(lecture__period__period__icontains=q) | Q(lecture__semester__icontains=q) | Q(lecture__major__icontains=q) for q in q_list]
                            )
