@@ -48,7 +48,11 @@ pipenv のパッケージを利用しつつdjangoサーバーを起動
 ```
 $ pipenv run server
 ```
+
 1. 管理者作成
 ```
 $ python manage.py createsuperuser
 ```
+
+1. .envファイル作成
+`.env.sample`ファイルと同階層に`.env`ファイルを作成する
