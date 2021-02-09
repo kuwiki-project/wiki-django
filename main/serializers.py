@@ -20,7 +20,7 @@ class LectureSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Lecture
-        fields = ('id', 'year', 'group_code', 'code', 'name', 'instructor_set',
+        fields = ('year', 'group_code', 'code', 'name', 'instructor_set',
                   'period_set', 'semester', 'major', 'url', 'num_periods', 'course_code', 'course_numbering')
 
 
@@ -36,5 +36,5 @@ class CourseSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Course
-        read_only_fields = ['course_code', 'course_numbering', 'name', 'field', 'lecture_set', 'exam_set', 'exam_count']
-        fields = ('course_code', 'course_numbering', 'name', 'field', 'lecture_set', 'exam_set', 'exam_count')
+        read_only_fields = ['id', 'course_code', 'course_numbering', 'name', 'field', 'lecture_set', 'exam_set', 'exam_count']
+        fields = ('id', 'course_code', 'course_numbering', 'name', 'field', 'lecture_set', 'exam_set', 'exam_count')
