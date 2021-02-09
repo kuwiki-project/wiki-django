@@ -11,7 +11,7 @@ class CustomAllauthAdapter(DefaultAccountAdapter):
     def save_user(self, request, user, form, commit=True):
         user = super(CustomAllauthAdapter, self).save_user(
             request, user, form, commit=False)
-        email = request.POST['email']
+        email = request.POST.get('email', False)
         email = email.split('@', 1)[1]
         if(email != 'st.kyoto-u.ac.jp'):
             return
