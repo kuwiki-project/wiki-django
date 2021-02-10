@@ -1,8 +1,9 @@
 from rest_framework.permissions import IsAuthenticated, IsAdminUser, AllowAny
 from rest_framework.viewsets import ModelViewSet
-from rest_framework.generics import ListAPIView
+from rest_framework.generics import ListAPIView, GenericAPIView
+from rest_framework.response import Response
 
-from .serializers import CourseSerializer, ExamSerializer, InstructorSerializer, PeriodSerializer, LectureSerializer
+from .serializers import CourseSerializer, ExamSerializer, InstructorSerializer, PeriodSerializer, LectureSerializer, CustomPasswordResetSerializer
 from .models import Course, Lecture, Exam, Instructor, Period
 from .filters import CourseFilter
 from django.db.models import Prefetch, Q, Count
@@ -51,3 +52,14 @@ class InstructorViewSet(ModelViewSet):
     permission_classes = (IsAdminUser, )
     serializer_class = InstructorSerializer
     queryset = Instructor.objects.all()
+
+class PasswordResetView(GenericAPIView):
+    permission_classes = (AllowAny,)
+    serializer_class = CustomPasswordResetSerializer
+
+    def post(self, request):
+        serializer = self.get_serializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response('Password reset e-mail has been sent.', status=200)
+        return Response(serializer.errors, status=400)
