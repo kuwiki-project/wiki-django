@@ -12,7 +12,7 @@ urlpatterns = [
     re_path(r'^rest-auth/', include('rest_auth.urls')),
     re_path(r'^rest-auth/registration/', include('rest_auth.registration.urls')),
     re_path(r'^account/', include('allauth.urls')),
-    re_path("docs/", include_docs_urls(title='API Document')),
+    re_path("docs/", include_docs_urls(title='API Document', permission_classes=[AllowAny, ], authentication_classes=[]))),
 ]
 
 if settings.DEBUG:
