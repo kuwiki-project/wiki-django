@@ -191,6 +191,7 @@ REST_FRAMEWORK = {
         'rest_framework.parsers.FormParser',
         'rest_framework.parsers.MultiPartParser'
     ),
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema'
 }
 
 EMAIL_HOST = 'smtp.gmail.com'
@@ -226,6 +227,6 @@ if DEBUG:
     ]
 
     DEBUG_TOOLBAR_CONFIG = {
-        "SHOW_TOOLBAR_CALLBACK" : lambda request: True,
+        "SHOW_TOOLBAR_CALLBACK": lambda request: True,
         'INTERCEPT_REDIRECTS': False,
     }
