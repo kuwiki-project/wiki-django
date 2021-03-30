@@ -140,7 +140,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-SITE_ID = 2
+SITE_ID = env('SITE_ID')
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
