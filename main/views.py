@@ -18,6 +18,13 @@ class CourseViewSet(ListAPIView):
     filter_class = CourseFilter
     queryset = Course.objects.all()
 
+    def get_permissions(self):
+        if self.action in ['list','retrieve']:
+            permission_classes=[IsAuthenticated]
+        else:
+            permission_classes=[IsAdminUser]
+        return [permission() for permission in permission_classes]
+
     def get_queryset(self):
         q = super(CourseViewSet, self).get_queryset().prefetch_related(Prefetch("lecture_set", queryset=Lecture.objects.all(
         ).prefetch_related("period_set", "instructor_set").order_by("-id")), "exam_set").annotate(exam_count=Count('exam', distinct=True)).order_by("-id")
