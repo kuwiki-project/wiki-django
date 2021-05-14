@@ -14,13 +14,13 @@ class CustomPasswordResetSerializer(PasswordResetSerializer):
 class InstructorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Instructor
-        fields = ('lecture', 'instructor')
+        fields = ('lecture', 'name')
 
 
 class PeriodSerializer(serializers.ModelSerializer):
     class Meta:
         model = Period
-        fields = ('lecture', 'period')
+        fields = ('lecture', 'name')
 
 
 class LectureSerializer(serializers.ModelSerializer):
