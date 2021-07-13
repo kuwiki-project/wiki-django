@@ -1,6 +1,13 @@
 {% extends "account/email/base_message.txt" %}
 {% load account %}
 {% load i18n %}
-{% block content %}{% autoescape off %}{% user_display user as user_display %}下記URLよりメールアドレスの認証を完了させてください。
+{% block content %}{% autoescape off %}{% user_display user as user_display %}以下のURLよりメールアドレスの認証を完了させてください。
 
-{{ activate_url }}{% endautoescape %}{% endblock %}
+{{ activate_url }}
+
+----------
+京大wiki運営
+HP: https://www.kuwiki.net/
+お問い合わせ: kuwiki99@gmail.com
+
+{% endautoescape %}{% endblock %}

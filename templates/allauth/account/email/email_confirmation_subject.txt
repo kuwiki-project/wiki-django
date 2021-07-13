@@ -1,4 +1,4 @@
 {% load i18n %}
 {% autoescape off %}
-{% blocktrans %}京大wiki{% endblocktrans %}
+{% blocktrans %}[京大wiki] アカウント登録{% endblocktrans %}
 {% endautoescape %}
