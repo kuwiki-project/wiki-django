@@ -1,58 +1,84 @@
+## API　ドキュメント
+https://api.kuwiki.net/docs
+
 ## 環境構築手順
 
+###### wiki-django フォルダに移動
 
-1. pipenv を導入
+```
+$cd wiki-django
+```
+
+###### pipenv を導入
+
 ```
 $ pip install pipenv
 ```
-pipenvとは，パッケージ管理ツール
 
-1. パッケージをインストール
+pipenv とは，パッケージ管理ツール
+
+###### パッケージを一括インストール
+
 ```
 $ pipenv sync --dev
 ```
+
 Pipfile にもとづき pipenv がパッケージをインストール
 
-1. mysql 導入
+###### mysql 導入
+
 ```
 $ brew install mysql
 $ mysql --version
 ```
 
-1. mysql サーバー起動
+###### mysql サーバー起動
+
 ```
 $ mysql.server start
 ```
 
-1. mysql サーバー作成
+###### mysql サーバー作成
+
 ```
 $ mysql -u root
 mysql> create database kuwiki;
 mysql> show databases;
 ```
 
-1. データベースのテーブルを作成
+###### データベースのテーブルを作成
+
 ```
 $ pipenv shell
 (wiki-django)$ python manage.py migrate
 (wiki-django)$ exit
 ```
 
-1. django サーバー起動
-```
-$ pipenv shell
-(wiki-django)$ python manage.py runserver
-```
-pipenv のパッケージを利用しつつdjangoサーバーを起動
-以下のコマンドに省略できる
-```
-$ pipenv run server
-```
+###### 管理者作成
 
-1. 管理者作成
 ```
 $ python manage.py createsuperuser
 ```
 
-1. .envファイル作成
-`.env.sample`ファイルと同階層に`.env`ファイルを作成する
+###### .env ファイル作成
+
+```
+$cd kuwiki
+$cp .env.sample .env
+```
+
+###### .env ファイルの中身を記入
+
+###### django サーバー起動
+
+```
+$ pipenv shell
+(wiki-django)$ python manage.py runserver
+```
+
+pipenv のパッケージを利用しつつ django サーバーを起動
+以下のコマンドに省略できる
+
+```
+$ pipenv run server
+```

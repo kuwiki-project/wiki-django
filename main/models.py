@@ -87,10 +87,10 @@ class Lecture(models.Model):
 class Instructor(models.Model):
     lecture = models.ForeignKey(Lecture, db_column='code', to_field='code',
                                 on_delete=models.SET_NULL,  blank=True, null=True)
-    instructor = models.CharField(max_length=100, blank=False, null=False)
+    name = models.CharField(max_length=100, blank=False, null=False)
 
 
 class Period(models.Model):
     lecture = models.ForeignKey(Lecture, db_column='code', to_field='code',
                                 on_delete=models.SET_NULL,  blank=True, null=True)
-    period = models.CharField(max_length=5, blank=False, null=False)
+    name = models.CharField(max_length=5, blank=False, null=False)

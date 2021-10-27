@@ -1,17 +1,26 @@
 from rest_framework import serializers
 from .models import Lecture, Instructor, Period, Course, Exam
+from rest_auth.serializers import PasswordResetSerializer
+
+class CustomPasswordResetSerializer(PasswordResetSerializer):
+    def get_email_options(self):
+        data = {
+            'email_template_name': 'password_reset.html',
+            'subject_template_name': 'password_reset_subject.txt',
+        }
+        return data
 
 
 class InstructorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Instructor
-        fields = ('lecture', 'instructor')
+        fields = ('lecture', 'name')
 
 
 class PeriodSerializer(serializers.ModelSerializer):
     class Meta:
         model = Period
-        fields = ('lecture', 'period')
+        fields = ('lecture', 'name')
 
 
 class LectureSerializer(serializers.ModelSerializer):

@@ -3,6 +3,9 @@ from django.urls import re_path, path
 from django.conf.urls import include, url
 from django.contrib import admin
 from main.urls import router
+from rest_framework.documentation import include_docs_urls
+from rest_framework.permissions import AllowAny
+from main.views import PasswordResetView
 
 urlpatterns = [
     url(r'^api/', include('main.urls')),
@@ -11,6 +14,9 @@ urlpatterns = [
     re_path(r'^rest-auth/', include('rest_auth.urls')),
     re_path(r'^rest-auth/registration/', include('rest_auth.registration.urls')),
     re_path(r'^account/', include('allauth.urls')),
+    url(r'^', include('django.contrib.auth.urls')),
+    url(r'^password/reset/', PasswordResetView.as_view()),
+    re_path("docs/", include_docs_urls(title='API Document', permission_classes=[AllowAny, ], authentication_classes=[])),
 ]
 
 if settings.DEBUG:
