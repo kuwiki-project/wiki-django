@@ -19,7 +19,7 @@ class ExamAdmin(admin.ModelAdmin):
     list_display = ('course_code', 'name', 'field', 'drive_id', 'drive_link', 'drive_link_tag')
 
 class CourseAdmin(admin.ModelAdmin):
-    list_display = ('course_code', 'course_numbering', 'name', 'field', 'lecture_set', 'exam_set')
+    list_display = ('course_code', 'course_numbering', 'name', 'field')
 
 class PeriodAdmin(admin.ModelAdmin):
     list_display = ('lecture', 'name')
