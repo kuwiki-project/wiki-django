@@ -24,7 +24,7 @@ class CourseViewSet(ListAPIView):
         search_word = self.request.query_params.get('search', None)
         if search_word !='' and search_word != None:
             q_list = search_word.split()
-            query = reduce(and_, [Q(name__icontains=q) | Q(field__icontains=q) | Q(lecture__year__icontains=q) | Q(lecture__instructor__instructor__icontains=q) | Q(lecture__period__period__icontains=q) | Q(lecture__semester__icontains=q) | Q(lecture__major__icontains=q) for q in q_list]
+            query = reduce(and_, [Q(name__icontains=q) | Q(field__icontains=q) | Q(lecture__year__icontains=q) | Q(lecture__instructor__name__icontains=q) | Q(lecture__period__name__icontains=q) | Q(lecture__semester__icontains=q) | Q(lecture__major__icontains=q) for q in q_list]
                            )
             return q.filter(query)
         return q
