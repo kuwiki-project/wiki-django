@@ -22,11 +22,11 @@ class CourseAdmin(admin.ModelAdmin):
     list_display = ('course_code', 'course_numbering', 'name', 'field', 'lecture_set', 'exam_set')
 
 class PeriodAdmin(admin.ModelAdmin):
-    list_display = ('lecture', 'period')
+    list_display = ('lecture', 'name')
     raw_id_fields = ('lecture',)
 
 class InstructorAdmin(admin.ModelAdmin):
-    list_display = ('lecture', 'instructor')
+    list_display = ('lecture', 'name')
     raw_id_fields = ('lecture',)
 
 
