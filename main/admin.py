@@ -25,7 +25,6 @@ class PeriodAdmin(admin.ModelAdmin):
     list_display = ('lecture', 'period')
     raw_id_fields = ('lecture',)
 
-
 class InstructorAdmin(admin.ModelAdmin):
     list_display = ('lecture', 'instructor')
     raw_id_fields = ('lecture',)
