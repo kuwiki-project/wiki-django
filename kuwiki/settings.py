@@ -48,16 +48,15 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-    'rest_framework',
-    'rest_framework.authtoken',
-    'rest_auth',
-    'rest_auth.registration',
-    'django_filters',
+    'corsheaders',  # CORS設定
+    'rest_framework',  # DjangoRestFramework
+    'rest_framework.authtoken',  # トークン認証に必要
+    'dj_rest_auth',  # dj_rest_auth
+    'dj_rest_auth.registration',  # dj_rest_authライブラリのアカウント登録
+    'django_filters',  # djangoフィルター
     'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    'allauth.socialaccount.providers.twitter',
-    'corsheaders',
+    'allauth.account',  # allauthライブラリアカウント周り
+    'allauth.socialaccount',  # おまじない
     'main.apps.MainConfig',
 ]
 
@@ -141,19 +140,42 @@ USE_L10N = True
 
 USE_TZ = True
 
-SITE_ID = env('SITE_ID')
+SITE_ID = int(env('SITE_ID'))
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT=os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': (
+        'django_filters.rest_framework.DjangoFilterBackend',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'dj_rest_auth.jwt_auth.JWTCookieAuthentication',
+    ),
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 100,
+    'DEFAULT_PARSER_CLASSES': (
+        'rest_framework.parsers.JSONParser',
+        'rest_framework.parsers.FormParser',
+        'rest_framework.parsers.MultiPartParser'
+    ),
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema'
+}
 
 AUTHENTICATION_BACKENDS = (
     "django.contrib.auth.backends.ModelBackend",
     "allauth.account.auth_backends.AuthenticationBackend",
 )
 
+DEFAULT_AUTO_FIELD='django.db.models.AutoField' 
+
+REST_USE_JWT = True
 AUTH_USER_MODEL = 'main.CustomUser'
 ACCOUNT_ADAPTER = 'main.adapter.CustomAllauthAdapter'
 ACCOUNT_USERNAME_REQUIRED = False
@@ -172,28 +194,6 @@ ACCOUNT_LOGOUT_ON_PASSWORD_CHANGE = False
 REST_SESSION_LOGIN = False
 OLD_PASSWORD_FIELD_ENABLED = False
 LOGOUT_ON_PASSWORD_CHANGE = False
-
-REST_FRAMEWORK = {
-    'DEFAULT_FILTER_BACKENDS': (
-        'django_filters.rest_framework.DjangoFilterBackend',
-    ),
-    'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
-    ),
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.TokenAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
-        'rest_framework.authentication.BasicAuthentication',
-    ),
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 100,
-    'DEFAULT_PARSER_CLASSES': (
-        'rest_framework.parsers.JSONParser',
-        'rest_framework.parsers.FormParser',
-        'rest_framework.parsers.MultiPartParser'
-    ),
-    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema'
-}
 
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587

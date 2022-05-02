@@ -4,24 +4,21 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-django = "*"
+django = "==3.2"
 djangorestframework = "*"
 mysqlclient = "*"
 django-filter = "*"
 django-cors-headers = "*"
-djangorestframework-jwt = "*"
-django-extra-fields = "*"
-pillow = "*"
 django-allauth = "*"
-django-rest-auth = "*"
-django-debug-toolbar = "==2.2"
+dj-rest-auth = "*"
+django-debug-toolbar = "*"
 django-environ = "*"
 django-coreapi = "*"
+djangorestframework-simplejwt = "*"
 
 [dev-packages]
 
 [requires]
-python_version = "3.9"
 
 [scripts]
 server = "python manage.py runserver"

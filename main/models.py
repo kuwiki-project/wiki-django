@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth.models import BaseUserManager
 from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
-from django.utils.translation import ugettext_lazy as _
 
 from django.core.validators import MaxValueValidator, MinValueValidator
 
@@ -39,7 +38,6 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     department = models.CharField(default='', max_length=128, blank=True)
     company = models.CharField(default='', max_length=128, blank=True)
     date_joined = models.DateTimeField(auto_now_add=True)
-    icon_id = models.IntegerField(default=0)
 
     USERNAME_FIELD = 'email'
     objects = MyUserManager()
@@ -49,14 +47,16 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
 
 class Course(models.Model):
-    course_code = models.CharField(max_length=20, unique=True, blank=True, null=True)
+    course_code = models.CharField(
+        max_length=20, unique=True, blank=True, null=True)
     course_numbering = models.CharField(max_length=100, blank=True, null=True)
     name = models.CharField(max_length=100, blank=True, null=True)
     field = models.CharField(max_length=100, blank=True, null=True)
 
 
 class Exam(models.Model):
-    course_code = models.ForeignKey(Course,  db_column='course_code', to_field='course_code', on_delete=models.SET_NULL,  blank=True, null=True)
+    course_code = models.ForeignKey(Course,  db_column='course_code',
+                                    to_field='course_code', on_delete=models.SET_NULL,  blank=True, null=True)
     name = models.CharField(max_length=100, blank=True, null=True)
     field = models.CharField(max_length=100, blank=True, null=True)
     drive_id = models.CharField(max_length=1000, blank=True, null=True)
@@ -77,7 +77,8 @@ class Lecture(models.Model):
     major = models.CharField(max_length=100, null=True, blank=True)
     url = models.CharField(max_length=100, null=True, blank=True)
     num_periods = models.IntegerField(null=True, blank=True)
-    course_code = models.ForeignKey(Course,  db_column='course_code', to_field='course_code', on_delete=models.SET_NULL,  blank=True, null=True)
+    course_code = models.ForeignKey(Course,  db_column='course_code',
+                                    to_field='course_code', on_delete=models.SET_NULL,  blank=True, null=True)
     course_numbering = models.CharField(max_length=100, null=True, blank=True)
 
     def __str__(self):

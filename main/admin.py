@@ -7,7 +7,7 @@ admin.site.index_title = 'メニュー'
 
 
 class CustomUserAdmin(admin.ModelAdmin):
-    list_display = ('email', 'is_staff', 'is_active', 'date_joined', 'icon_id')
+    list_display = ('email', 'is_staff', 'is_active', 'date_joined')
 
 
 class LectureAdmin(admin.ModelAdmin):

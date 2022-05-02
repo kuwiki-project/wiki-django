@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import Lecture, Instructor, Period, Course, Exam
-from rest_auth.serializers import PasswordResetSerializer
+from dj_rest_auth.serializers import PasswordResetSerializer
+
 
 class CustomPasswordResetSerializer(PasswordResetSerializer):
     def get_email_options(self):
@@ -36,7 +37,9 @@ class LectureSerializer(serializers.ModelSerializer):
 class ExamSerializer(serializers.ModelSerializer):
     class Meta:
         model = Exam
-        fields =  ('course_code', 'name', 'field', 'drive_id', 'drive_link', 'drive_link_tag')
+        fields = ('course_code', 'name', 'field',
+                  'drive_id', 'drive_link', 'drive_link_tag')
+
 
 class CourseSerializer(serializers.ModelSerializer):
     lecture_set = LectureSerializer(many=True, read_only=True)
@@ -45,5 +48,7 @@ class CourseSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Course
-        read_only_fields = ['id', 'course_code', 'course_numbering', 'name', 'field', 'lecture_set', 'exam_set', 'exam_count']
-        fields = ('id', 'course_code', 'course_numbering', 'name', 'field', 'lecture_set', 'exam_set', 'exam_count')
+        read_only_fields = ['id', 'course_code', 'course_numbering',
+                            'name', 'field', 'lecture_set', 'exam_set', 'exam_count']
+        fields = ('id', 'course_code', 'course_numbering', 'name',
+                  'field', 'lecture_set', 'exam_set', 'exam_count')
